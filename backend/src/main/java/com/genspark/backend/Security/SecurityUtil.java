@@ -26,6 +26,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class SecurityUtil {
     //algorithm used to sign and decrypt JWT access tokens
+    protected static final String adminPassword = "secretAdminPassword";
     protected static Algorithm jwtAlgorithm = Algorithm.HMAC256("thisIsASecretKeyThatIsUsedInAlgorithmToGenerateJWTTokensAndNormallyShouldBeMoreSecure".getBytes());
 
     /**

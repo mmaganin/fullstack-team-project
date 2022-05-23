@@ -30,4 +30,11 @@ public class AppUser {
     private Collection<Movie> movies_in_list = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
+
+    public AppUser(String email, String password, Collection<Movie> movies_in_list, Collection<AppRole> roles) {
+        this.email = email;
+        this.password = password;
+        this.movies_in_list = movies_in_list;
+        this.roles = roles;
+    }
 }

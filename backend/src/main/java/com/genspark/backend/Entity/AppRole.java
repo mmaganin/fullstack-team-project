@@ -22,4 +22,8 @@ public class AppRole {
     @GeneratedValue(strategy = AUTO)
     int id;
     String name;
+
+    public AppRole(String name) {
+        this.name = name;
+    }
 }
