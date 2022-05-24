@@ -4,7 +4,7 @@ import com.genspark.backend.Dao.AppRoleDao;
 import com.genspark.backend.Dao.AppUserDao;
 import com.genspark.backend.Entity.AppRole;
 import com.genspark.backend.Entity.AppUser;
-import com.genspark.backend.Entity.Movie;
+import com.genspark.backend.Entity.Media;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -106,7 +106,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
      * @return AppUser with altered movies list
      */
     @Override
-    public AppUser editMovieList(String email, String password, Movie movieToEdit) {
+    public AppUser editMovieList(String email, String password, Media mediaToEdit) {
         //NEEDS COMPLETION
         AppUser appUser = new AppUser();
         return saveUser(appUser);

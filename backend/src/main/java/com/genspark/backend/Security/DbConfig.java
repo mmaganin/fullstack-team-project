@@ -20,7 +20,7 @@ import static com.genspark.backend.Security.SecurityUtil.adminPassword;
  */
 @Configuration
 @RequiredArgsConstructor
-public class AppDbConfig {
+public class DbConfig {
     private final PasswordEncoder passwordEncoder;
 
     /**

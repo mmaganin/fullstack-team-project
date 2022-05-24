@@ -25,8 +25,9 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class SecurityUtil {
-    //algorithm used to sign and decrypt JWT access tokens
+    //password for admin user with ROLE_ADMIN role
     protected static final String adminPassword = "secretAdminPassword";
+    //algorithm used to sign and decrypt JWT access tokens
     protected static Algorithm jwtAlgorithm = Algorithm.HMAC256("thisIsASecretKeyThatIsUsedInAlgorithmToGenerateJWTTokensAndNormallyShouldBeMoreSecure".getBytes());
 
     /**
@@ -41,26 +42,19 @@ public class SecurityUtil {
      */
     public static String generateJWTToken(String email, List<String> authorities, String requestURL, Algorithm algorithm, boolean isAccessToken) {
         if (isAccessToken) {
-            return JWT.create()
-                    .withSubject(email)
-                    .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) //amount of time before access token expires
-                    .withIssuer(requestURL)
-                    .withClaim("roles", authorities)
-                    .sign(algorithm);
+            return JWT.create().withSubject(email).withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) //amount of time before access token expires
+                    .withIssuer(requestURL).withClaim("roles", authorities).sign(algorithm);
         } else {
-            return JWT.create()
-                    .withSubject(email)
-                    .withExpiresAt(new Date(System.currentTimeMillis() + 480 * 60 * 1000)) //amount of time before refresh token expires
-                    .withIssuer(requestURL)
-                    .sign(algorithm);
+            return JWT.create().withSubject(email).withExpiresAt(new Date(System.currentTimeMillis() + 480 * 60 * 1000)) //amount of time before refresh token expires
+                    .withIssuer(requestURL).sign(algorithm);
         }
     }
 
     /**
      * takes JWT access and refresh tokens and generates a map whose key value pairs are used in JSON responses
      *
-     * @param access_token
-     * @param refresh_token
+     * @param access_token  JWT access token
+     * @param refresh_token JWT refresh token
      * @return Map with tokens as values
      */
     public static Map<String, String> createTokensBody(String access_token, String refresh_token) {
@@ -103,16 +97,15 @@ public class SecurityUtil {
      *
      * @param appUserService service object for user operations
      * @param email          user's email
-     * @param refresh_token
+     * @param refresh_token  JWT refresh token
      * @param request        incoming REST HTTP request
      * @param response       outgoing REST HTTP response
-     * @throws IOException
+     * @throws IOException if you cannot write to http HttpServletResponse
      */
     public static void getAccessAndWriteTokens(AppUserService appUserService, String email, String refresh_token, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Algorithm algorithm = jwtAlgorithm;
         AppUser user = appUserService.getUser(email);
-        String access_token = generateJWTToken(user.getEmail(), user.getRoles().stream()
-                .map(AppRole::getName).collect(Collectors.toList()), request.getRequestURL().toString(), algorithm, true);
+        String access_token = generateJWTToken(user.getEmail(), user.getRoles().stream().map(AppRole::getName).collect(Collectors.toList()), request.getRequestURL().toString(), algorithm, true);
         Map<String, String> tokens = createTokensBody(access_token, refresh_token);
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
@@ -135,8 +128,7 @@ public class SecurityUtil {
         stream(roles).forEach(role -> {
             authorities.add(new SimpleGrantedAuthority(role));
         });
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(email, null, authorities);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         filterChain.doFilter(request, response);
     }
@@ -148,7 +140,7 @@ public class SecurityUtil {
      * @param appUserService      service object for user operations
      * @param request             incoming REST HTTP request
      * @param response            outgoing REST HTTP response
-     * @throws IOException
+     * @throws IOException if you cannot write to http HttpServletResponse
      */
     public static void execAuthHeaderActions(String authorizationHeader, AppUserService appUserService, HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
@@ -169,7 +161,7 @@ public class SecurityUtil {
      * @param request             incoming REST HTTP request
      * @param response            outgoing REST HTTP response
      * @param filterChain         security config auth filter object
-     * @throws IOException
+     * @throws IOException if you cannot write to http HttpServletResponse
      */
     public static void execAuthHeaderActions(String authorizationHeader, HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException {
         try {

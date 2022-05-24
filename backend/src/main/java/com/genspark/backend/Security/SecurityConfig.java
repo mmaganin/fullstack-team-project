@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Bean that configures CORS to allow GET, PUT, POST requests from frontend and coinmarketcap API
+     * Bean that configures CORS to allow GET, PUT, POST requests from frontend
      *
      * @return a custom CORS configuration CorsConfigurationSource
      */
