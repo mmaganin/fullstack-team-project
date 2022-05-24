@@ -13,16 +13,16 @@ import java.util.ArrayList;
 public class ApiResponsePojo {
     public String imdbID;
     public String tmdbID;
-    public int imdbRating;
-    public int imdbVoteCount;
-    public int tmdbRating;
+    public Long imdbRating;
+    public Long imdbVoteCount;
+    public Long tmdbRating;
     public String backdropPath;
     public BackdropURLs backdropURLs;
     public String originalTitle;
-    public ArrayList<Integer> genres;
+    public ArrayList<Long> genres;
     public ArrayList<String> countries;
-    public int year;
-    public int runtime;
+    public Long year;
+    public Long runtime;
     public ArrayList<String> cast;
     public ArrayList<String> significants;
     public String title;
@@ -31,9 +31,15 @@ public class ApiResponsePojo {
     public String video;
     public String posterPath;
     public PosterURLs posterURLs;
-    public int age;
+    public Long age;
     public StreamingInfo streamingInfo;
     public String originalLanguage;
+    public String firstAirYear;
+    public String lastAirYear;
+    public ArrayList<String> episodeRuntimes;
+    public Long seasons;
+    public Long episodes;
+    public String status;
 }
 
 //Classes that allow for fasterxml library to generate pojo from JSON String
@@ -124,7 +130,7 @@ class StreamingInfo {
 
 class Us {
     public String link;
-    public int added;
-    public int leaving;
+    public Long added;
+    public Long leaving;
 }
 

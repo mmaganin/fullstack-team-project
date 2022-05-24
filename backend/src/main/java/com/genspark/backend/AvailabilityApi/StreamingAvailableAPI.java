@@ -23,7 +23,6 @@ public class StreamingAvailableAPI {
     public static String baseURI = "https://streaming-availability.p.rapidapi.com/search/basic?";
 
     /**
-     *
      * @param country
      * @param service
      * @param type
@@ -47,7 +46,6 @@ public class StreamingAvailableAPI {
     }
 
     /**
-     *
      * @param country
      * @param service
      * @param type
@@ -70,7 +68,6 @@ public class StreamingAvailableAPI {
     }
 
     /**
-     *
      * @param jsonResponse
      * @return
      */
@@ -92,7 +89,6 @@ public class StreamingAvailableAPI {
     }
 
     /**
-     *
      * @param apiResponsePojo
      * @return
      */
@@ -104,16 +100,24 @@ public class StreamingAvailableAPI {
                 apiResponsePojo.imdbVoteCount,
                 apiResponsePojo.tmdbRating,
                 apiResponsePojo.originalTitle,
+                apiResponsePojo.countries,
                 apiResponsePojo.year,
                 apiResponsePojo.runtime,
                 apiResponsePojo.cast,
+                apiResponsePojo.significants,
                 apiResponsePojo.title,
                 apiResponsePojo.overview,
                 apiResponsePojo.tagline,
                 apiResponsePojo.video,
                 apiResponsePojo.age,
                 apiResponsePojo.originalLanguage,
-                apiResponsePojo.posterURLs.original
+                apiResponsePojo.posterURLs.original,
+                apiResponsePojo.firstAirYear,
+                apiResponsePojo.lastAirYear,
+                apiResponsePojo.episodeRuntimes,
+                apiResponsePojo.seasons,
+                apiResponsePojo.episodes,
+                apiResponsePojo.status
         );
     }
 

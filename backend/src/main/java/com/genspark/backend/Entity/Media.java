@@ -21,37 +21,47 @@ import static javax.persistence.GenerationType.AUTO;
 public class Media {
     @Id
     @GeneratedValue(strategy = AUTO)
-    private int id;
+    private Long id;
     private String imdbID;
     private String tmdbID;
-    private int imdbRating;
-    private int imdbVoteCount;
-    private int tmdbRating;
+    private Long imdbRating;
+    private Long imdbVoteCount;
+    private Long tmdbRating;
     private String originalTitle;
-    private int year;
-    private int runtime;
-    //@ManyToMany(fetch = FetchType.EAGER)
+    private ArrayList<String> countries;
+    private Long year;
+    private Long runtime;
     private ArrayList<String> cast;
+    private ArrayList<String> significants;
     private String title;
     private String overview;
     private String tagline;
     private String video;
-    private int age;
+    private Long age;
     private String originalLanguage;
     private String posterUrlOriginal;
+    private String firstAirYear;
+    private String lastAirYear;
+    private ArrayList<String> episodeRuntimes;
+    private Long seasons;
+    private Long episodes;
+    private String status;
 
-    public Media(String imdbID, String tmdbID, int imdbRating, int imdbVoteCount, int tmdbRating, String originalTitle,
-                 int year, int runtime, ArrayList<String> cast,
-                 String title, String overview, String tagline, String video, int age, String originalLanguage, String posterUrlOriginal) {
+    public Media(String imdbID, String tmdbID, Long imdbRating, Long imdbVoteCount, Long tmdbRating, String originalTitle,
+                 ArrayList<String> countries, Long year, Long runtime, ArrayList<String> cast, ArrayList<String> significants, String title, String overview, String tagline,
+                 String video, Long age, String originalLanguage, String posterUrlOriginal, String firstAirYear,
+                 String lastAirYear, ArrayList<String> episodeRuntimes, Long seasons, Long episodes, String status) {
         this.imdbID = imdbID;
         this.tmdbID = tmdbID;
         this.imdbRating = imdbRating;
         this.imdbVoteCount = imdbVoteCount;
         this.tmdbRating = tmdbRating;
         this.originalTitle = originalTitle;
+        this.countries = countries;
         this.year = year;
         this.runtime = runtime;
         this.cast = cast;
+        this.significants = significants;
         this.title = title;
         this.overview = overview;
         this.tagline = tagline;
@@ -59,5 +69,11 @@ public class Media {
         this.age = age;
         this.originalLanguage = originalLanguage;
         this.posterUrlOriginal = posterUrlOriginal;
+        this.firstAirYear = firstAirYear;
+        this.lastAirYear = lastAirYear;
+        this.episodeRuntimes = episodeRuntimes;
+        this.seasons = seasons;
+        this.episodes = episodes;
+        this.status = status;
     }
 }
