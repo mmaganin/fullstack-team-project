@@ -120,8 +120,4 @@ public class StreamingAvailableAPI {
                 apiResponsePojo.status
         );
     }
-
-//    public static void main(String[] args) throws IOException, InterruptedException {
-//        System.out.println(StreamingAvailableAPI.getMediaAvailability("us", "netflix", "movie", "en", "", "demon").toString());
-//    }
 }

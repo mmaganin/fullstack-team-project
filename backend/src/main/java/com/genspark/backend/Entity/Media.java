@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static javax.persistence.GenerationType.AUTO;
 
 /**
- * DB Entity for storing media for must-watch list
+ * DB Entity for storing media (shows or movies) for a user's must-watch list
  */
 @Entity
 @Data

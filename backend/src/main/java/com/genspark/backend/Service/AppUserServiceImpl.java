@@ -102,7 +102,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
      *
      * @param email       user's email
      * @param password    user's password
-     * @param movieToEdit movie to add or remove from list
+     * @param mediaToEdit movie to add or remove from list
      * @return AppUser with altered movies list
      */
     @Override
@@ -124,10 +124,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         Collection<AppRole> roles = new ArrayList<>();
         AppRole userRole;
         if ((userRole = appRoleDao.findByName("ROLE_USER")) == null) {
-            appRoleDao.save((userRole = new AppRole(0, "ROLE_USER")));
+            appRoleDao.save((userRole = new AppRole(0L, "ROLE_USER")));
         }
         roles.add(userRole);
-        AppUser appUser = new AppUser(0, email, password, new ArrayList<>(), roles);
+        AppUser appUser = new AppUser(0L, email, password, new ArrayList<>(), roles);
 
         return saveUser(appUser);
     }

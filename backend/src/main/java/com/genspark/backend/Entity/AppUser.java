@@ -20,21 +20,21 @@ import static javax.persistence.GenerationType.AUTO;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = AUTO)
-    private int id;
+    private Long id;
     private String email;
     private String password;
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    private Collection<Media> movies_in_list = new ArrayList<>();
+    private Collection<Media> media_in_list = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
 
-    public AppUser(String email, String password, Collection<Media> movies_in_list, Collection<AppRole> roles) {
+    public AppUser(String email, String password, Collection<Media> media_in_list, Collection<AppRole> roles) {
         this.email = email;
         this.password = password;
-        this.movies_in_list = movies_in_list;
+        this.media_in_list = media_in_list;
         this.roles = roles;
     }
 }

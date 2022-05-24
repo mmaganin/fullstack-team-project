@@ -1,7 +1,6 @@
 package com.genspark.backend.AvailabilityApi;
 
-import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -54,48 +53,23 @@ class BackdropURLs {
     public String original;
 }
 
-class Netflix {
-    public Us us;
-}
-
-class Peacock {
-    public Us us;
-}
-
-class Prime {
-    public Us us;
-}
-
-class Disney {
-    public Us us;
-}
-
-class Hulu {
-    public Us us;
-}
-
-class Hbo {
-    public Us us;
-}
-
-class Paramount {
-    public Us us;
-}
-
-class Starz {
-    public Us us;
-}
-
-class Showtime {
-    public Us us;
-}
-
-class Apple {
-    public Us us;
-}
-
-class Mubi {
-    public Us us;
+class CountryCodes {
+    public OnPlatform us;
+    public OnPlatform ca;
+    public OnPlatform gb;
+    public OnPlatform de;
+    public OnPlatform fr;
+    public OnPlatform it;
+    public OnPlatform au;
+    public OnPlatform mx;
+    public OnPlatform br;
+    public OnPlatform es;
+    public OnPlatform in;
+    public OnPlatform id;
+    public OnPlatform ru;
+    public OnPlatform jp;
+    public OnPlatform th;
+    public OnPlatform kr;
 }
 
 class PosterURLs {
@@ -115,20 +89,17 @@ class PosterURLs {
 }
 
 class StreamingInfo {
-    public Netflix netflix;
-    public Peacock peacock;
-    public Hbo hbo;
-    public Prime prime;
-    public Disney disney;
-    public Hulu hulu;
-    public Paramount paramount;
-    public Starz starz;
-    public Showtime showtime;
-    public Apple apple;
-    public Mubi mubi;
+    public CountryCodes netflix;
+    public CountryCodes prime;
+    public CountryCodes disney;
+    public CountryCodes apple;
+    public CountryCodes mubi;
+    public CountryCodes curiosity;
+    public CountryCodes zee5;
+    public CountryCodes hotstar;
 }
 
-class Us {
+class OnPlatform {
     public String link;
     public Long added;
     public Long leaving;

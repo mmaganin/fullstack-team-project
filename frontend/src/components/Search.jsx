@@ -78,17 +78,13 @@ const Search = () => {
                     label="Service"
                     onChange={handleChangeService}
                 >
-                    <MenuItem value={"netflix"}>Netflix</MenuItem>
-                    <MenuItem value={"prime"}>Amazon Prime</MenuItem>
+                    <MenuItem value={"apple"}>Apple TV</MenuItem>
+                    <MenuItem value={"curiosity"}>Curiosity Stream</MenuItem>
                     <MenuItem value={"disney"}>Disney Plus</MenuItem>
-                    <MenuItem value={"hbo"}>Hbo</MenuItem>
-                    <MenuItem value={"hulu"}>Hulu</MenuItem>
-                    <MenuItem value={"peacock"}>Peacock</MenuItem>
-                    <MenuItem value={"paramount"}>Paramount</MenuItem>
-                    <MenuItem value={"starz"}>Starz</MenuItem>
-                    <MenuItem value={"showtime"}>Showtime</MenuItem>
-                    <MenuItem value={"apple"}>Apple</MenuItem>
-                    <MenuItem value={"mubi"}>Mubi</MenuItem>
+                    <MenuItem value={"mubi"}>MUBI</MenuItem>
+                    <MenuItem value={"netflix"}>Netflix</MenuItem>
+                    <MenuItem value={"prime"}>Prime Video</MenuItem>
+                    <MenuItem value={"zee5"}>ZEE5</MenuItem>
                 </Select>
             </FormControl>
             <FormControl >
@@ -100,7 +96,21 @@ const Search = () => {
                     onChange={handleChangeCountry}
                 >
                     <MenuItem value={"us"}>United States</MenuItem>
-                    
+                    <MenuItem value={"ca"}>Canada</MenuItem>
+                    <MenuItem value={"gb"}>United Kingdom</MenuItem>
+                    <MenuItem value={"de"}>Germany</MenuItem>
+                    <MenuItem value={"fr"}>France</MenuItem>
+                    <MenuItem value={"it"}>Italy</MenuItem>
+                    <MenuItem value={"au"}>Australia</MenuItem>
+                    <MenuItem value={"mx"}>Mexico</MenuItem>
+                    <MenuItem value={"br"}>Brazil</MenuItem>
+                    <MenuItem value={"es"}>Spain</MenuItem>
+                    <MenuItem value={"in"}>India</MenuItem>
+                    <MenuItem value={"id"}>Indonesia</MenuItem>
+                    <MenuItem value={"ru"}>Russia</MenuItem>
+                    <MenuItem value={"jp"}>Japan</MenuItem>
+                    <MenuItem value={"th"}>Thailand</MenuItem>
+                    <MenuItem value={"kr"}>South Korea</MenuItem>
                 </Select>
             </FormControl>
             <TextField label="Keyword" variant="outlined" onChange={handleChangeKeyword}/>

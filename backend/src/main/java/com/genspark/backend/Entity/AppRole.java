@@ -20,7 +20,7 @@ import static javax.persistence.GenerationType.AUTO;
 public class AppRole {
     @Id
     @GeneratedValue(strategy = AUTO)
-    int id;
+    Long id;
     String name;
 
     public AppRole(String name) {
