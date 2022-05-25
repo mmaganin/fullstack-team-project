@@ -47,6 +47,7 @@ public class Media {
     private Long episodes;
     private String status;
 
+    //constructor that does not include Long id so that MySQL auto generates a new unique id
     public Media(String imdbID, String tmdbID, Long imdbRating, Long imdbVoteCount, Long tmdbRating, String originalTitle,
                  ArrayList<String> countries, Long year, Long runtime, ArrayList<String> cast, ArrayList<String> significants, String title, String overview, String tagline,
                  String video, Long age, String originalLanguage, String posterUrlOriginal, String firstAirYear,

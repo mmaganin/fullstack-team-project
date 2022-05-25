@@ -6,7 +6,7 @@ import lombok.ToString;
 import java.util.ArrayList;
 
 /**
- *
+ * fasterxml library generates a list of this pojo in Results object after getting data from Streaming Availibility API
  */
 @ToString
 public class ApiResponsePojo {
@@ -41,7 +41,7 @@ public class ApiResponsePojo {
     public String status;
 }
 
-//Classes that allow for fasterxml library to generate pojo from JSON String
+//Classes that allow for fasterxml library to use a JSON string to generate a Results pojo containing ApiResponsePojo pojos
 
 class BackdropURLs {
     @JsonProperty("1280")

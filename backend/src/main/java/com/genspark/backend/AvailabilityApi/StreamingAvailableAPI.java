@@ -19,17 +19,18 @@ import com.genspark.backend.Entity.Media;
 public class StreamingAvailableAPI {
     //api key required for API calls
     private static String apiKey = "";
-    //API base URI that requires country, service, type parameters
+    //API base URI that requires at least country, service, and type parameters
     public static String baseURI = "https://streaming-availability.p.rapidapi.com/search/basic?";
 
     /**
-     * @param country
-     * @param service
-     * @param type
-     * @param output_language
-     * @param genre
-     * @param keyword
-     * @return
+     * Generates proper URI, sends a GET request to Streaming API, converts String response to List of Media DB entities
+     * @param country         country code: us, ca, gb, de, fr, it, au, mx, br, es, in, id, ru, jp, th, kr
+     * @param service         streaming service: netflix, prime, disney, apple, mubi, curiosity, zee5
+     * @param type            type of media: movie, series
+     * @param output_language language to get API response in, default is 'en' for English only in this app
+     * @param genre           defaults to nothing in this app and is not used, details in API documentation
+     * @param keyword         any keyword related to desired media to search for
+     * @return list of Media objects: data related to movie or show
      * @throws IOException
      * @throws InterruptedException
      */
@@ -46,13 +47,14 @@ public class StreamingAvailableAPI {
     }
 
     /**
-     * @param country
-     * @param service
-     * @param type
-     * @param output_language
-     * @param genre
-     * @param keyword
-     * @return
+     * generates string containing completed URI (using inputted parameters) to send with request to API
+     * @param country         country code: us, ca, gb, de, fr, it, au, mx, br, es, in, id, ru, jp, th, kr
+     * @param service         streaming service: netflix, prime, disney, apple, mubi, curiosity, zee5
+     * @param type            type of media: movie, series
+     * @param output_language language to get API response in, default is 'en' for English only in this app
+     * @param genre           defaults to nothing in this app and is not used, details in API documentation
+     * @param keyword         any keyword related to desired media to search for
+     * @return string containing completed URI to send with request to API
      */
     public static String createUriStrWithParams(String country, String service, String type, String output_language, String genre, String keyword) {
         if (country.equals("") || service.equals("") || type.equals(""))
@@ -68,8 +70,9 @@ public class StreamingAvailableAPI {
     }
 
     /**
-     * @param jsonResponse
-     * @return
+     * maps String output of API response to a list of Media objects DB entity
+     * @param jsonResponse response from streaming API as String
+     * @return list of Media objects entities: data related to movie or show
      */
     public static List<Media> mapStrResponseToMediaEntities(String jsonResponse) {
         ObjectMapper om = new ObjectMapper();
@@ -89,8 +92,9 @@ public class StreamingAvailableAPI {
     }
 
     /**
-     * @param apiResponsePojo
-     * @return
+     * converts POJO from API response to Media DB entity
+     * @param apiResponsePojo Pojo generated from Results object from API response
+     * @return Media object entity: data related to movie or show
      */
     public static Media apiPojoToMediaEntity(ApiResponsePojo apiResponsePojo) {
         return new Media(
