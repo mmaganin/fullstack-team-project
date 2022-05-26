@@ -89,14 +89,26 @@ class PosterURLs {
 }
 
 class StreamingInfo {
-    public CountryCodes netflix;
-    public CountryCodes prime;
-    public CountryCodes disney;
+    public CountryCodes all4;
     public CountryCodes apple;
-    public CountryCodes mubi;
+    public CountryCodes britbox;
+    public CountryCodes crave;
     public CountryCodes curiosity;
-    public CountryCodes zee5;
+    public CountryCodes disney;
+    public CountryCodes hbo;
     public CountryCodes hotstar;
+    public CountryCodes hulu;
+    public CountryCodes iplayer;
+    public CountryCodes mubi;
+    public CountryCodes netflix;
+    public CountryCodes now;
+    public CountryCodes paramount;
+    public CountryCodes peacock;
+    public CountryCodes prime;
+    public CountryCodes showtime;
+    public CountryCodes stan;
+    public CountryCodes starz;
+    public CountryCodes zee5;
 }
 
 class OnPlatform {

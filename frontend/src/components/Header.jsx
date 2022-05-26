@@ -21,7 +21,7 @@ const Header = () => {
         <AppBar position="static" sx={{ bgcolor: "#1B1B3A" }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Tooltip title="Navigate to Search Page">
+                    <Tooltip title="Navigate to Homepage">
                         <Button
                             onClick={handleNavSearch}
                             sx={{ width: '80px' }}
@@ -34,7 +34,7 @@ const Header = () => {
                         <Tooltip title="Navigate to Must Watch List">
                             <Button
                                 onClick={handleNavList}
-
+                                variant="contained"
                             >
                                 Must-Watch-List
                             </Button>

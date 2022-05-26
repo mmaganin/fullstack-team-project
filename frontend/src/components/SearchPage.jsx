@@ -1,10 +1,10 @@
-import MovieCard from "./MovieCard";
+import MediaCard from "./MediaCard";
 import React, { useState } from 'react';
-import { InputLabel, FormControl, Select, MenuItem, TextField, Button, Box, Stack, Paper } from '@mui/material';
+import { InputLabel, FormControl, Select, MenuItem, TextField, Button, Box, Paper } from '@mui/material';
 
 const formsContainerStyle = {
     padding: 2,
-    margin: 3,
+    margin: 2,
     resize: "horizontal",
     width: 1000,
     display: 'flex',
@@ -64,6 +64,7 @@ const Search = () => {
     const [country, setCountry] = useState('');
     const [keyword, setKeyword] = useState('');
 
+    const [fetched, setFetched] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
 
     const handleChangeType = (event) => {
@@ -82,13 +83,11 @@ const Search = () => {
         setKeyword(event.target.value);
     };
 
-
-
     const handleSearch = () => {
+        setFetched(true)
         var json = JSON.stringify({
             country: country, service: service, type: type, keyword: keyword
         })
-        console.log(json)
         const fetchFrom = 'http://localhost:8080/api/search';
         const payload = {
             method: 'POST',
@@ -104,10 +103,13 @@ const Search = () => {
             })
             .then((searchResponse) => {
                 setSearchResults(searchResponse);
+                setFetched(false)
                 console.log(searchResponse)
                 window.alert("Search success!")
             })
             .catch((error) => {
+                setFetched(false)
+                setSearchResults(null)
                 window.alert("Search failed!")
                 console.log("Search failed: " + error)
             })
@@ -120,16 +122,23 @@ const Search = () => {
     ]
 
     return (
-        <Box sx={{display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+            <Box sx={{ margin: 2, fontSize: '2rem' }}>Homepage</Box>
             <Paper elevation={3} sx={formsContainerStyle}>
+                <Box sx={{ margin: 2, fontSize: '1rem', }}>
+                    Search for your favorite movies and shows and see if they are available on different streaming platforms.
+                </Box>
                 <Box sx={searchFormsStyle}>
                     {forms.map((form) => getForm(form))}
                 </Box>
                 <Box sx={searchFormsStyle}>
-                    <TextField required sx={singleFormStyle} label="Keyword" variant="outlined" onChange={handleChangeKeyword} />
+                    <TextField sx={singleFormStyle} label="Keyword" variant="outlined" onChange={handleChangeKeyword} />
                     <Button sx={{ width: 100, height: 50 }} variant="outlined" onClick={handleSearch}>Search</Button>
                 </Box>
             </Paper>
+            {fetched || searchResults === null
+                ? ""
+                : searchResults.map((searchResult) => <MediaCard {...searchResult} />)}
         </Box>
     );
 }
