@@ -51,7 +51,7 @@ const sectionBodyStyle = {
  */
 const MediaCard = (props) => {
     //extracts required variables from props
-    const { posterUrlOriginal, title, originalTitle, year, overview, cast, significants,
+    const { posterUrlOriginal, title, year, overview, cast, significants,
         episodes, firstAirYear, lastAirYear, seasons, imdbRating, imdbVoteCount } = props
     //configures specific props to be displayable on card
     var displayOverview = getStringOfMaxSize(overview, 225);
@@ -208,7 +208,7 @@ function getCardSection(props) {
                         var displayLabel = info.label === "" ? ""
                             : info.label + ": "
                         return !isFieldPresent(info.value) ? ""
-                            : <p style={{ margin: 2 }}><strong>{displayLabel}</strong>{info.value}</p>
+                            : <p key={title + info.label + info.value} style={{ margin: 2 }}><strong>{displayLabel}</strong>{info.value}</p>
                     })}
                 </Box>{/*text body of card section */}
             </Box>{/*single section of card containing data for movie or TV show */}
@@ -248,7 +248,7 @@ function getStringOfMaxSize(string, maxSize) {
  * @returns true if variable is not empty, null, "", or undefined, false otherwise
  */
 function isFieldPresent(variable) {
-    if (variable === undefined || variable === null || variable === "" || variable === []) return false;
+    if (variable === undefined || variable === null || variable === "" || variable.length === 0) return false;
     return true;
 }
 

@@ -10,14 +10,14 @@ function App() {
     <div>
       <Box sx={{ minHeight: "920px" }}>
         <Router>
-          <Header />
+          <Header />{/*Header component containig MUI AppBar component that allows user to navigate to different pages */}
           <Routes>
             <Route exact path="/" element={<SearchPage />} />
             <Route path="/mustwatchlist" element={<MustWatchListPage />} />
-          </Routes>
-        </Router>
-      </Box>
-      <Footer />
+          </Routes>{/*Contians Route components that are navigated to depending on URL*/}
+        </Router>{/*Router that navigates to different pages of web app */}
+      </Box>{/*Container with Router component as child, style puts Footer at bottom of page */}
+      <Footer /> {/*Footer at bottom of page containing details like copyright */}
     </div>
   );
 }

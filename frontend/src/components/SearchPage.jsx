@@ -1,28 +1,47 @@
 import MediaCard from "./MediaCard";
 import React, { useState } from 'react';
 import { InputLabel, FormControl, Select, MenuItem, TextField, Button, Box, Paper } from '@mui/material';
-
+//Styles
 const formsContainerStyle = {
     padding: 2,
     margin: 2,
-    resize: "horizontal",
     width: 1000,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
 }
-
 const searchFormsStyle = {
     display: 'flex',
     alignItems: 'center'
 }
-
 const singleFormStyle = {
     width: 300,
     margin: 1
 }
-
+const componentContainerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+}
+const homepageTitleStyle = {
+    margin: 2,
+    fontSize: '2rem'
+}
+const searchButtonStyle = {
+    width: 100,
+    height: 50
+}
+const topOfFormMsgStyle = {
+    margin: 2,
+    fontSize: '1rem',
+}
+const searchMessageStyle = {
+    margin: 2,
+    fontSize: '1.5rem',
+}
+//Variables containing items to display in dropdown menus of form
+//contains value and label pairs for different Country menu items 
 const countryFormItems = [
     { value: "us", label: "United States" },
     { value: "ca", label: "Canada" },
@@ -41,7 +60,7 @@ const countryFormItems = [
     { value: "th", label: "Thailand" },
     { value: "kr", label: "South Korea" },
 ]
-
+//contains value and label pairs for different Service menu items 
 const serviceFormItems = [
     { value: "apple", label: "Apple TV" },
     { value: "curiosity", label: "Curiosity Stream" },
@@ -51,102 +70,148 @@ const serviceFormItems = [
     { value: "prime", label: "Prime Video" },
     { value: "zee5", label: "ZEE5" }
 ]
-
+//contains value and label pairs for different Type menu items 
 const typeFormItems = [
     { value: "movie", label: "Movie" },
     { value: "series", label: "Series" },
 ]
-
-
-const Search = () => {
+/**
+ * Located at '/' path in Router component, homepage of web app where you search for movies or tv shows on different streaming services
+ * @returns Search page component
+ */
+const SearchPage = () => {
+    //states that change when user edits search forms
     const [type, setType] = useState('');
     const [service, setService] = useState('');
     const [country, setCountry] = useState('');
     const [keyword, setKeyword] = useState('');
-
+    //states that change when user clicks Search button
+    const [searchClicked, setSearchClicked] = useState(false);
     const [fetched, setFetched] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
-
+    //method handlers that change states when modifying different search forms
     const handleChangeType = (event) => {
         setType(event.target.value);
     };
-
     const handleChangeService = (event) => {
         setService(event.target.value);
     };
-
     const handleChangeCountry = (event) => {
         setCountry(event.target.value);
     };
-
     const handleChangeKeyword = (event) => {
         setKeyword(event.target.value);
     };
-
+    //array of dropdown menu form props to map into the forms section of Search page
+    const forms = [
+        { id: "type-form", label: "Type", value: type, handleMethod: handleChangeType, formItems: typeFormItems },
+        { id: "service-form", label: "Service", value: service, handleMethod: handleChangeService, formItems: serviceFormItems },
+        { id: "country-form", label: "Country", value: country, handleMethod: handleChangeCountry, formItems: countryFormItems }
+    ]
+    //sends POST request to fetch search results from backend after clicking Search button
     const handleSearch = () => {
-        setFetched(true)
-        var json = JSON.stringify({
-            country: country, service: service, type: type, keyword: keyword
-        })
-        const fetchFrom = 'http://localhost:8080/api/search';
-        const payload = {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: json
-        }
-        fetch(fetchFrom, payload)
+        setSearchClicked(true)
+        setFetched(false)
+        var apiCallLoad = getApiCallLoad({ country, service, type, keyword })
+        fetch(apiCallLoad.fetchFrom, apiCallLoad.payload)
             .then(response => {
                 if (!response.ok) throw new Error(response.status);
                 else return response.json();
             })
             .then((searchResponse) => {
                 setSearchResults(searchResponse);
-                setFetched(false)
+                setFetched(true)
+                setSearchClicked(false)
                 console.log(searchResponse)
                 window.alert("Search success!")
             })
             .catch((error) => {
                 setFetched(false)
-                setSearchResults(null)
+                setSearchClicked(false)
                 window.alert("Search failed!")
                 console.log("Search failed: " + error)
             })
     };
-
-    const forms = [
-        { id: "type-form", label: "Type", value: type, handleMethod: handleChangeType, formItems: typeFormItems },
-        { id: "service-form", label: "Service", value: service, handleMethod: handleChangeService, formItems: serviceFormItems },
-        { id: "country-form", label: "Country", value: country, handleMethod: handleChangeCountry, formItems: countryFormItems }
-    ]
-
+    /**
+     * Generates appropriate message after attempting a search
+     * @returns Box component containing String message
+     */
+    function getSearchMessage() {
+        if (searchResults === null && !searchClicked) return "";
+        var loadingMsg = "Loading... Please Wait!"
+        if (searchResults !== null && searchResults.length === 0 && !searchClicked) {
+            loadingMsg = "There are no results that match your search."
+        }
+        return (
+            <Box sx={searchMessageStyle}>
+                {loadingMsg}
+            </Box>
+        )
+    }
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-            <Box sx={{ margin: 2, fontSize: '2rem' }}>Homepage</Box>
+        <Box sx={componentContainerStyle}>
+            <Box sx={homepageTitleStyle}>Homepage</Box>
             <Paper elevation={3} sx={formsContainerStyle}>
-                <Box sx={{ margin: 2, fontSize: '1rem', }}>
+                <Box sx={topOfFormMsgStyle}>
                     Search for your favorite movies and shows and see if they are available on different streaming platforms.
                 </Box>
                 <Box sx={searchFormsStyle}>
                     {forms.map((form) => getForm(form))}
-                </Box>
+                </Box>{/*container for drop down menu forms */}
                 <Box sx={searchFormsStyle}>
                     <TextField sx={singleFormStyle} label="Keyword" variant="outlined" onChange={handleChangeKeyword} />
-                    <Button sx={{ width: 100, height: 50 }} variant="outlined" onClick={handleSearch}>Search</Button>
-                </Box>
-            </Paper>
-            {fetched || searchResults === null
-                ? ""
-                : searchResults.map((searchResult) => <MediaCard {...searchResult} />)}
-        </Box>
+                    <Button sx={searchButtonStyle} variant="outlined" onClick={handleSearch}>Search</Button>
+                </Box>{/*container for keyword form */}
+            </Paper>{/*Container for user input forms */}
+            {(!fetched && searchClicked) || searchResults === null || searchResults.length === 0
+                ? getSearchMessage()
+                : searchResults.map((searchResult) => getMediaCard(searchResult))}{/*mapped MediaCard search results */}
+        </Box>/*Box container for SearchPage: contains title in Box, forms in Paper, and MediaCard search results */
     );
 }
-
+/**
+ * Generates MediaCard component with unique key
+ * @param {{id: Number, imdbID: String, tmdbID: String, imdbRating: String, imdbVoteCount: Number, tmdbRating: Number, 
+ * originalTitle: String, countries: Array<String>, year: Number, runtime: Number, cast: Array<String>, significants: Array<String>, 
+ * title: String, overview: String, tagline: Number, video: Number, age: Number, originalLanguage: String, posterUrlOriginal: String, 
+ * firstAirYear: String, lastAirYear: String, episodeRuntimes: Array<String>, seasons: Number, episodes: Number, status: String}} searchResult 
+ * @returns MediaCard component
+ */
+function getMediaCard(searchResult) {
+    return (
+        <MediaCard key={searchResult.title} {...searchResult} />
+    )
+}
+/**
+ * generates the REST API load for searching for media based on entries inputted by user into form
+ * @param {{country: String, service: String, type: String, keyword: String}} props contains entries inputted into form by user
+ * @returns REST API load with URI to fetch from and payload
+ */
+function getApiCallLoad(props) {
+    const { country, service, type, keyword } = props
+    var json = JSON.stringify({
+        country: country, service: service, type: type, keyword: keyword
+    })
+    return {
+        fetchFrom: 'http://localhost:8080/api/search',
+        payload: {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: json
+        }
+    }
+}
+/**
+ * Generates individual dropdown menu forms mapped from SearchPage component
+ * @param {{ id: String, label: String, value: String, handleMethod: function, formItems: {value: String, label: String} }} form props required for dropdown menu form
+ * @returns Single dropdown menu form
+ */
 function getForm(form) {
     const { id, label, value, handleMethod, formItems } = form
     return (
-        <FormControl required sx={singleFormStyle}>
+        <FormControl required key={id} sx={singleFormStyle}>
             <InputLabel id={id}>{label}</InputLabel>
             <Select
                 labelId={id}
@@ -159,12 +224,16 @@ function getForm(form) {
         </FormControl>
     )
 }
-
+/**
+ * Generates a single menu item of a dropdown menu, mapped from getForm function
+ * @param {{label: String, value: String }} formItem 
+ * @returns Single dropdown MenuItem
+ */
 function getFormItems(formItem) {
     const { label, value } = formItem
     return (
-        <MenuItem value={value}>{label}</MenuItem>
+        <MenuItem key={value} value={value}>{label}</MenuItem>
     )
 }
 
-export default Search;
+export default SearchPage;
