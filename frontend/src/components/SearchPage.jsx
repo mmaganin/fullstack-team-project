@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { InputLabel, FormControl, Select, MenuItem, TextField, Button, Box, Paper } from '@mui/material';
 //Styles
 const formsContainerStyle = {
-    padding: 2,
-    margin: 2,
-    width: 1000,
+    padding: '2rem',
+    margin: '1rem',
+    width: 'auto',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -13,11 +13,12 @@ const formsContainerStyle = {
 }
 const searchFormsStyle = {
     display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center'
 }
 const singleFormStyle = {
-    width: 300,
-    margin: 1
+    width: '18rem',
+    margin: '0.5rem'
 }
 const componentContainerStyle = {
     display: 'flex',
@@ -25,19 +26,19 @@ const componentContainerStyle = {
     alignItems: 'center',
 }
 const homepageTitleStyle = {
-    margin: 2,
+    margin: '1.5rem',
     fontSize: '2rem'
 }
 const searchButtonStyle = {
-    width: 100,
-    height: 50
+    width: '6rem',
+    height: '3.5rem'
 }
 const topOfFormMsgStyle = {
-    margin: 2,
+    margin: '1rem',
     fontSize: '1rem',
 }
 const searchMessageStyle = {
-    margin: 2,
+    margin: '1.5rem',
     fontSize: '1.5rem',
 }
 //Variables containing items to display in dropdown menus of form

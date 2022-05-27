@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
-import { Card, Box, Divider, IconButton, Menu, MenuItem } from '@mui/material'
+import { Card, Box, IconButton, Menu, MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
-
 //Styles
 const cardStyle = {
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
-    height: 200,
-    width: 1200,
-    margin: 2,
+    minHeight: '13rem',
+    maxWidth: '75rem',
+    width: 'auto',
+    margin: '1rem',
 }
 const imgContainerStyle = {
-    minWidth: 145, width: 145, marginTop: 'auto', marginBottom: 'auto'
+    minWidth: '9rem', 
+    width: '9rem', 
+    marginTop: 'auto', 
+    marginBottom: 'auto'
 }
 const imgStyle = {
     width: '100%',
@@ -21,10 +25,8 @@ const cardSectionStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minWidth: 200,
-    width: '100%',
-    marginLeft: 2,
-    marginRight: 2,
+    width: '13rem',
+    margin: '0.5rem',
 }
 const menuButtonStyle = {
     display: 'flex',
@@ -34,7 +36,7 @@ const menuButtonStyle = {
 const sectionTitleStyle = {
     typography: 'subtitle2',
     fontStyle: 'italic',
-    fontSize: 18
+    fontSize: '1.2rem'
 }
 const sectionBodyStyle = {
     typography: 'body2',
@@ -212,7 +214,7 @@ function getCardSection(props) {
                     })}
                 </Box>{/*text body of card section */}
             </Box>{/*single section of card containing data for movie or TV show */}
-            <Divider orientation="vertical" flexItem />{/*vertical divider separating different sections of the card */}
+            {/* <Divider orientation="vertical" flexItem />vertical divider separating different sections of the card */}
         </>
     )
 }

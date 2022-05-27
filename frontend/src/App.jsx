@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 function App() {
   return (
     <div>
-      <Box sx={{ minHeight: "920px" }}>
+      <Box sx={{ minHeight: "98vh" }}>
         <Router>
           <Header />{/*Header component containig MUI AppBar component that allows user to navigate to different pages */}
           <Routes>
