@@ -81,10 +81,10 @@ const typeFormItems = [
  */
 const SearchPage = () => {
     //states that change when user edits search forms
-    const [type, setType] = useState('');
-    const [service, setService] = useState('');
-    const [country, setCountry] = useState('');
-    const [keyword, setKeyword] = useState('');
+    const [type, setType] = useState("");
+    const [service, setService] = useState("");
+    const [country, setCountry] = useState("");
+    const [keyword, setKeyword] = useState("");
     //states that change when user clicks Search button
     const [searchClicked, setSearchClicked] = useState(false);
     const [fetched, setFetched] = useState(false);
@@ -110,6 +110,16 @@ const SearchPage = () => {
     ]
     //sends POST request to fetch search results from backend after clicking Search button
     const handleSearch = () => {
+        //API call requires type, service and country parameters
+        if(type === "" || service === "" || country === ""){
+            window.alert("You must make a selection for Type, Service, and country.")
+            return;
+        }
+        //Regex only allows for letters, numbers or .?! inputs into keyword form
+        if(keyword !== "" && /[a-zA-Z0-9.?!]+/.exec(keyword)[0] !== keyword){
+            window.alert("Enter only letters numbers or .?! into the Keyword form.")
+            return;
+        } 
         setSearchClicked(true)
         setFetched(false)
         var apiCallLoad = getApiCallLoad({ country, service, type, keyword })
