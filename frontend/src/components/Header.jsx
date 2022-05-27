@@ -1,47 +1,57 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-import { AppBar, Box, Toolbar, Container, Button, Tooltip } from '@mui/material';
-
+import { AppBar, Box, Toolbar, Button, Tooltip } from '@mui/material';
+//Styles
 const imgStyle = {
     width: '100%',
     height: 'auto',
 }
+const toolbarStyle = {
+    display: 'flex',
+    justifyContent: 'space-between'
+}
+const linkStyle = {
+    margin: '0px 5rem'
+}
+/**
+ * Navigation bar at top of web page
+ * @returns AppBar MUI component that acts provides navigation links to different pages of apps
+ */
 const Header = () => {
     const navigate = useNavigate()
-
+    //navigates to account page if account icon clicked
     function handleNavList() {
-        navigate('/mustwatchlist')
+        navigate('/account')
     }
-
+    //navigates to homepage if movie icon clicked
     function handleNavSearch() {
         navigate('/')
     }
 
     return (
         <AppBar position="static" sx={{ bgcolor: "#1B1B3A" }}>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
+            <Toolbar disableGutters sx={toolbarStyle}>
+                <Box sx={linkStyle}>
                     <Tooltip title="Navigate to Homepage">
                         <Button
                             onClick={handleNavSearch}
                             sx={{ width: '80px' }}
                         >
                             <img src="images/appbar-logo.png" alt="" style={imgStyle} />
-                        </Button>
-                    </Tooltip>{/*contains site logo that navigates to search page, provides tip popup*/}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Navigate to Must Watch List">
-                            <Button
-                                onClick={handleNavList}
-                                variant="contained"
-                            >
-                                Must-Watch-List
-                            </Button>
-                        </Tooltip>{/*Navigates to a user's must-watch-list*/}
-                    </Box>{/*contains elements providing functionality to link on right side of navbar*/}
-                </Toolbar>{/*contains navbar elements and provides Toolbar functionality*/}
-            </Container>{/*contains navbar elements and sets a size*/}
+                        </Button>{/*movie icon button that navigates to homepage page*/}
+                    </Tooltip>{/*contains site logo that navigates to search page/homepage, provides popup tip*/}
+                </Box>{/*Button container that provides left and right margin to button*/}
+                <Box sx={linkStyle}>
+                    <Tooltip title="Navigate to Account Page">
+                        <Button
+                            onClick={handleNavList}
+                            sx={{ width: '40px' }}
+                        >
+                            <img src="images/profile-icon.jpg" alt="" style={imgStyle} />
+                        </Button>{/*profile icon button that navigates to account page*/}
+                    </Tooltip>{/*Navigates to a user's account page, provides popup tip */}
+                </Box>{/*Button container that provides left and right margin to button*/}
+            </Toolbar>{/*contains navbar elements and provides Toolbar functionality*/}
         </AppBar> /*navbar at top of every page, contains navbar elements*/
     );
 }

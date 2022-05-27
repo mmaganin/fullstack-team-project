@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SearchPage from "./components/SearchPage";
-import MustWatchListPage from "./components/MustWatchListPage";
+import Account from "./components/Account";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Box } from '@mui/material';
@@ -13,7 +13,7 @@ function App() {
           <Header />{/*Header component containig MUI AppBar component that allows user to navigate to different pages */}
           <Routes>
             <Route exact path="/" element={<SearchPage />} />
-            <Route path="/mustwatchlist" element={<MustWatchListPage />} />
+            <Route path="/account" element={<Account />} />
           </Routes>{/*Contians Route components that are navigated to depending on URL*/}
         </Router>{/*Router that navigates to different pages of web app */}
       </Box>{/*Container with Router component as child, style puts Footer at bottom of page */}
