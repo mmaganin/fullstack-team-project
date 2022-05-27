@@ -116,10 +116,11 @@ const SearchPage = () => {
             return;
         }
         //Regex only allows for letters, numbers or .?! inputs into keyword form
-        if(keyword !== "" && /[a-zA-Z0-9.?!]+/.exec(keyword)[0] !== keyword){
+        let keywordRegex = /[a-zA-Z0-9.?!]+/.exec(keyword)
+        if(keywordRegex === null || keywordRegex[0] !== keyword){
             window.alert("Enter only letters numbers or .?! into the Keyword form.")
             return;
-        } 
+        }
         setSearchClicked(true)
         setFetched(false)
         var apiCallLoad = getApiCallLoad({ country, service, type, keyword })
