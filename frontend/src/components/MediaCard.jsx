@@ -1,47 +1,10 @@
 import React, { useState } from 'react'
 import { Card, Box, IconButton, Menu, MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
+import styles from "../Styles";
 //Styles
-const cardStyle = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    minHeight: '13rem',
-    maxWidth: '75rem',
-    width: 'auto',
-    margin: '1rem',
-}
-const imgContainerStyle = {
-    minWidth: '9rem', 
-    width: '9rem', 
-    marginTop: 'auto', 
-    marginBottom: 'auto'
-}
-const imgStyle = {
-    width: '100%',
-    height: 'auto',
-}
-const cardSectionStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '13rem',
-    margin: '0.5rem',
-}
-const menuButtonStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-const sectionTitleStyle = {
-    typography: 'subtitle2',
-    fontStyle: 'italic',
-    fontSize: '1.2rem'
-}
-const sectionBodyStyle = {
-    typography: 'body2',
-    width: '100%'
-}
+const { cardStyle, imgContainerStyle, cardSectionStyle, imgStyle,
+    menuButtonStyle, sectionTitleStyle, sectionBodyStyle } = styles
 /**
  * Component that displays a single search result for a movie or TV series which gets mapped onto the homepage after a successful search
  * @param {{id: Number, imdbID: String, tmdbID: String, imdbRating: String, imdbVoteCount: Number, tmdbRating: Number, 

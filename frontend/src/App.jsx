@@ -4,11 +4,13 @@ import Account from "./components/Account";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Box } from '@mui/material';
-
+import styles from './Styles'
+//Styles
+const { footerHeight } = styles
 function App() {
   return (
     <div>
-      <Box sx={{ minHeight: "98vh" }}>
+      <Box sx={footerHeight}>
         <Router>
           <Header />{/*Header component containig MUI AppBar component that allows user to navigate to different pages */}
           <Routes>

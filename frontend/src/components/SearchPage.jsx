@@ -1,46 +1,12 @@
 import MediaCard from "./MediaCard";
 import React, { useState } from 'react';
 import { InputLabel, FormControl, Select, MenuItem, TextField, Button, Box, Paper } from '@mui/material';
+import styles from "../Styles";
 //Styles
-const formsContainerStyle = {
-    padding: '2rem',
-    margin: '1rem',
-    width: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-}
-const searchFormsStyle = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center'
-}
-const singleFormStyle = {
-    width: '18rem',
-    margin: '0.5rem'
-}
-const componentContainerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-}
-const homepageTitleStyle = {
-    margin: '1.5rem',
-    fontSize: '2rem'
-}
-const searchButtonStyle = {
-    width: '6rem',
-    height: '3.5rem'
-}
-const topOfFormMsgStyle = {
-    margin: '1rem',
-    fontSize: '1rem',
-}
-const searchMessageStyle = {
-    margin: '1.5rem',
-    fontSize: '1.5rem',
-}
+const {
+    formsContainerStyle, searchFormsStyle, singleFormStyle, componentContainerStyle,
+    homepageTitleStyle, searchButtonStyle, topOfFormMsgStyle, searchMessageStyle
+} = styles
 //Variables containing items to display in dropdown menus of form
 //contains value and label pairs for different Country menu items 
 const countryFormItems = [
@@ -112,13 +78,13 @@ const SearchPage = () => {
     //sends POST request to fetch search results from backend after clicking Search button
     const handleSearch = () => {
         //API call requires type, service and country parameters
-        if(type === "" || service === "" || country === ""){
+        if (type === "" || service === "" || country === "") {
             window.alert("You must make a selection for Type, Service, and country.")
             return;
         }
         //Regex only allows for letters, numbers or .?! inputs into keyword form
         let keywordRegex = /[a-zA-Z0-9.?!]+/.exec(keyword)
-        if(keywordRegex === null || keywordRegex[0] !== keyword){
+        if (keywordRegex === null || keywordRegex[0] !== keyword) {
             window.alert("Enter only letters numbers or .?! into the Keyword form.")
             return;
         }
